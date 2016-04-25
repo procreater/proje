@@ -1,0 +1,22 @@
+﻿@model Mvc.dal.Products
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/Index.cshtml";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    <table style="width:70%" class="bordered">
+        <tr>
+            <td>Product Name</td>
+            <td><input type="text" name="name" value="@Html.DisplayFor(model => model.Name)" /></td>
+        </tr>
+        <tr>
+            <td>Product Category</td>
+            <td><input type="text" name="category" value="@Html.DisplayFor(model => model.CategoryId)" /></td>
+        </tr>
+    </table>
+    <p><input type="submit" value="Update" /></p>
+}

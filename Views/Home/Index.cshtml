@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Mvc.dal.Products>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Index.cshtml";
+}
+<h1>Admin Panel</h1>
+<hr />
+    @Html.ActionLink("Create Product", "CreateProduct")
+<h2>Products</h2>
+@foreach (var item in Model)
+{
+    <section style="margin:15px; border-bottom:1px solid gray">
+        <div>Product Id : @Html.DisplayFor(model => item.Id)</div>
+        <div>Product Name : @Html.DisplayFor(model => item.Name)</div>
+        <div>Prouct Category : @Html.DisplayFor(model => item.ProductCategories.Name)</div>
+        @Html.ActionLink("Edit", "EditProduct", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id })
+    </section>
+}
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "post",
+            url: "@Url.Action("EditProduct", "Home")",
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+            },
+            success: function (result) {
+                alert("Updated Product");
+            },
+            error: function (result) {
+                alert(JSON.stringify(result));
+            }
+        });
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("CreateProduct", "Home")",
+                contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+            },
+            success: function (result) {
+                alert("Added Product");
+            },
+            error: function (result) {
+                alert(JSON.stringify(result));
+            }
+            });
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("DeleteProduct", "Home")",
+                contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+            },
+            success: function (result) {
+                alert("Deleted Product");
+            },
+            error: function (result) {
+                alert(JSON.stringify(result));
+            }
+        });
+
+    });
+</script>
+

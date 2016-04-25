@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Mvc.dal.Products>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Index.cshtml";
+}
+<h2>Create Product</h2>
+
+@using (Html.BeginForm())
+{
+    @TempData["result"]
+    <table style="width:70%" class="bordered">
+        <tr>
+            <td>Product Name</td>
+            <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <td>Product Category</td>
+            <td>
+                <select name="category" style="display:block">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@Html.DisplayFor(model => item.Id)">@Html.DisplayFor(model => item.Name)</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" value="Crate" /></p>
+}

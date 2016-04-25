@@ -1,0 +1,20 @@
+﻿@model Mvc.dal.Products
+@{
+    ViewBag.Title = "DeleteProduct";
+    Layout = "~/Views/Shared/Index.cshtml";
+}
+
+<h2>Delete Product</h2>
+
+<hr />
+<div>Product Id : @Html.DisplayFor(model => model.Id)</div>
+<div>Product Name : @Html.DisplayFor(model => model.Name)</div>
+<div>Prouct Category : @Html.DisplayFor(model => model.ProductCategories.Name)</div>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back", "Index")
+    </div>
+}
